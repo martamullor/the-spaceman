@@ -54,7 +54,7 @@ Html5 __Canvas__ and Vanilla __Javascript__
 ### Levels 
 * Check the time and increase level.
 * * *
-## Data structure FALTA
+## Data structure 
 __main.js__
 ````
 createStartScreen(id);
@@ -82,12 +82,17 @@ Game.generateElements();
 Game.gameOver();
 Game.init(); 
 Game.pause();
+Game.update();
+
+// Propiedad en el snake que sea interval para luego hacer el pause.
+// Primero la declaramos en undefined.
 ````
 __Player.js__
 ````
 function Player(){
 
 };
+
 Player.move();
 ````
 __Obstacles.js__
