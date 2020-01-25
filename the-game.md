@@ -35,7 +35,6 @@ Html5 __Canvas__ and Vanilla __Javascript__
 * In case of running out of oxygen -> Game Over -> Show Game Over screen
 * * *
 ## BACK LOG
-### Rotate canvas
 ### Score
 * Run counter and store score on game over
 ### High score
@@ -79,28 +78,25 @@ __Game.js__
 function Game(options){};
 Game.drawBoard();
 Game.drawPlayer();
-Game.generateObstacles();
+Game.generateElements();
 Game.gameOver();
-Game.init();
-garbageCollector;
+Game.init(); 
+Game.pause();
 ````
 __Player.js__
 ````
 function Player(){
-  this.width;
-  this.height;
-  this.color;
+
 };
 Player.move();
 ````
-__Obstacle.js__
+__Obstacles.js__
 ````
-function Obstacle(){
-  this.width;
-  this.height;
+function Obstacles(){
+  
 };
-moveForward();
+
 ````
 ## Links
-[Iron flip run Trello](https://trello.com/b/jvP5IE61/iron-flip-run)
-[Github](https://github.com/annaclf/iron-flip-run)
+[The Spaceman run Trello](https://trello.com/b/W8WEm8Gk/the-game)
+[Github](https://github.com/martamullor/the-spaceman)
