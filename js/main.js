@@ -1,104 +1,138 @@
 
-// Canvas
+let spaceman;
+let enemy = [];
 
-let canvas = document.getElementById("game");
-let ctx = canvas.getContext("2d");
+// Función que se declara en el HTML para iniciar el juego
 
-// Img
-
-let background;
-
-// The Spaceman - Player
-
-let player = {
-  x: 220,
-  y: canvas.height - 80,
-  width: 50,
-  height: 50,
-}
-
-let keyboard = {};
-
-// Functions
-
-
-function loadMedia(){
-  background = new Image();
-  background.src = "img/background.jpg";
-  background.onload = function(){
-    let interval = window.setInterval(update, 1000/55);
+function startGame() {
+  gameArea.start();
+  spaceman = new player(40, 40, "blue", 250, 450);
+  //enemy = new player(140,40, "red", 200, 50);
   }
-} 
 
-function drawBackground(){
-  ctx.drawImage(background,0,0); 
-}
-
-// Funciones del player - En teoría pertenecería a Game 
-
-function createPlayer(){
-  ctx.save();
-  ctx.fillStyle = "red";
-  ctx.fillRect(player.x, player.y, player.width, player.height);
-  ctx.restore();
-}
-
-// Función que creo que va en Game también según el juego del snake
-
-function assignControlsToKeys(){
-  // Cuando el usuario le da a una tecla se convierte en true
-    addEvent(document,"keydown", function(e){
-      keyboard[e.keyCode] = true;
-    });
-    addEvent(document,"keyup", function(e){
-      keyboard[e.keyCode] = false;
-    });
-
-  function addEvent(element, name, callback){
-    if(element.addEventListener){
-      // Navegadores buenos
-       element.addEventListener(name, callback, false);   
+  // Recargas del gameArea
+  
+  let gameArea = {
+    canvas: document.createElement("canvas"),
+    
+    start() {
+      this.canvas.width = 550;
+      this.canvas.height = 500;
+      this.context = this.canvas.getContext("2d");
+      document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+      this.frame = 0;
+      this.interval = setInterval(updateGameArea, 20);
+      window.addEventListener("keydown", function(e){
+        gameArea.key = e.keyCode;
+      })
+      window.addEventListener("keyup", function(e){
+        gameArea.key = false;
+      })
+    },
+    clear(){
+      this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
+    },
+    stop(){
+      clearInterval(this.interval);
     }
-    else if(element.attachEvent){
-      // Para internet explorer
-      elemento.attachEvent(name, callback);
+  }
+
+  // Función que evalua los frames
+
+  function everyInterval(n){
+    if ((gameArea.frame / n) % 1 == 0) {
+      return true;
+    } else {
+      return false;
     }
-  }  
-}
-
-function movePlayer(){
-  if(keyboard[37]){
-    // Movimiento a la izquierda
-    player.x -= 10;
-      if (player.x < 0) player.x = 0;
-  }
-  if(keyboard[39]){
-    // Movimiento a la izquierda
-    let limit = canvas.width - player.width;
-    player.x += 10;
-      if (player.x > limit) player.x = limit;
   }
 
-}
+  // Class Player de la que ahora mismo sacamos los enemigos.
 
-function update(){
-  movePlayer();
-  drawBackground();
-  createPlayer();
-}
+  function player(width, height, color, x, y){
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.x = x;
+    this.y = y;
+    this.update = function(){
+      ctx = gameArea.context;
+      ctx.fillStyle = color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+    this.newPos = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
+    this.crashWith = function(object){
+      let myLeft = this.x;
+      let myRight = this.x + this.width;
+      let myTop = this.y;
+      let myBottom = this.y + this.height;
+      let objetLeft = object.x;
+      let objectRight = object.x + object.width;
+      let objetTop = object.y;
+      let objectBottom = object.y + object.height;
+      let crash = true; 
+      if ((myBottom < objetTop) || (myTop > objectBottom) ||
+      (myRight < objetLeft) || (myLeft > objectRight)) {
+        crash = false;
+      }
+      return crash;
+    }
+  }
 
-// Call functions
-assignControlsToKeys(); 
-loadMedia();
+  // Funciones de movimiento del mi Player = SpaceMan
+  
+  function moveRight() {
+    spaceman.speedX += 8;
+  }
+
+  function moveLeft() {
+    spaceman.speedX -= 8;
+  }
 
 
+  // Update Game Area 
+
+  function updateGameArea() {
+  // Comprobamos los keyboards del teclado.
+      spaceman.speedX = 0;
+      spaceman.speedY = 0;
+      if (gameArea.key == 37){
+       spaceman.speedX = -8;
+    }
+      if (gameArea.key == 39){
+       spaceman.speedX = 8;
+    };
 
 
+    let x, y;
+    // Evaluamos si choca con el enemigo.
+    for (i = 0; i < enemy.length; i += 1) {
+      if (spaceman.crashWith(enemy[i])) {
+        gameArea.stop();
+        return;
+      }
+    }
+    gameArea.clear();
+    // Cada cierto tiempo pintamos un enemigo
 
-
-
-
-
-
-
+    gameArea.frame += 1;
+    if (gameArea.frame == 1 || everyInterval(150)) {
+      x = gameArea.canvas.width - 200;
+      y = gameArea.canvas.height - 500;
+      enemy.push(new player(70, 70, "red", x, y));
+    }
+    // Dirección de los enemigos
+    
+    for (i = 0; i < enemy.length; i += 1) {
+      //enemy[i].x += -1;
+      enemy[i].y += 1;
+      enemy[i].update();
+    }
+    spaceman.newPos();
+    spaceman.update();
+  }
   
