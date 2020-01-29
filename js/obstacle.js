@@ -7,14 +7,6 @@ class Obstacle {
       this.color = "red";
       this.speed = speed;
       //this.currentframe = 0;
-      //this.intervalId = undefined;
+      this.interval = undefined;
     }
-
-    /*
-    _updateFrameObstacle(){
-      this.intervalId = setInterval(function(){
-        this.currentFrame = ++this.currentFrame % frameCount;
-      }.bind(this), 150);
-    }
-    */
 }

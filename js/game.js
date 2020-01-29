@@ -27,12 +27,29 @@ class Game {
     });
   } 
 
-  _generateObstacle() {  
-    //let x, y;
+  everyInterval(n){
+    if ((this.interval / n) % 1 == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  _generateObstacle() { 
     for (let i = 0; i < 120; i++) {
-      this.obstacle.push(new Obstacle(50, 50, 300, 300, 50));
+      //if (this.everyInterval(10)){
+        this.obstacle.push(new Obstacle(50, 50, 130, -100, 200));
+        this.obstacle[i].y += 1;
+      //}
     }
   };
+
+
+  /*
+  updateObstacle(){
+    this.interval = setInterval(this._drawObstacle.bind(this), 100);
+  }
+  */
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
@@ -41,11 +58,12 @@ class Game {
     });
   }
 
+ // setInterval(_drawObstacle, 10);
+
   // CUANDO SE PINTAN LAS FUNCIONES
 
   start(){
     this._assignControlsToKeys();
-    //this._generateObstacle();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
@@ -54,13 +72,17 @@ class Game {
   }
 
   _update() {
- 
-    this._clear();
 
- 
+    this._generateObstacle();
+    console.log("Generate object");
+    this._clear();
     this._drawObstacle();
     this._drawPlayer();
-    this.interval = window.requestAnimationFrame(this._update.bind(this));
+    //this.updateObstacle();
+    //console.log("Update Area") 
+    if (!!this.interval) {
+      this.interval = window.requestAnimationFrame(this._update.bind(this));
+    }
     
   }
 
