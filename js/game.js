@@ -21,11 +21,17 @@ class Game {
       switch (e.keyCode) {
         case 37: // arrow left
           console.log("Left");
-          this.player.moveLeft();
+          this.player.moveLeft(); 
+          if (this.player.x < 0){
+            this.player.x = 0; 
+          } 
           break;
         case 39: // arrow right
           console.log("right");
           this.player.moveRight();
+          if (this.player.x > this.canvasWidth){
+            this.player.x = this.canvasWidth; 
+          } 
           break;
       }
       e.preventDefault();
@@ -35,8 +41,9 @@ class Game {
   
 
   _generateObstacle() { 
-    this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, 200));
-    console.log(this.obstacle);
+    this.intervalEntities = setInterval(() => {
+      this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, 200));
+    }, 300);
   };
 
 
@@ -44,15 +51,19 @@ class Game {
    this.intervalEntitiesMove = setInterval(() => {
     for (let i = 0; i < this.obstacle.length; i++) {
         this.obstacle[i].y += 1;
+        this._deleteObstacles();
+        console.log("delete object execute")
       }
-      // Borrar elementos que estan por debajo del height.
+      //this._deleteObstacles();
    }, 1); 
   };
 
   _deleteObstacles(){
-      if (this.obstacle < this.canvasHeight){
+    this.obstacle.forEach(element => {
+      if (this.canvasHeight < 300){
         this.obstacle.unshift();
       }
+    });
   }
 
 
@@ -74,10 +85,7 @@ class Game {
 
   start(){
     this._assignControlsToKeys();
-    this.intervalEntities = setInterval(() => {
-      this._generateObstacle();
-      console.log("Generate object");
-    }, 1500);
+    //this._generateObstacle();
     this._moveObstacle();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
@@ -91,7 +99,7 @@ class Game {
     this._clear();
     this._drawObstacle();
     this._drawPlayer();
-    this._deleteObstacles()
+    //this._deleteObstacles()
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
