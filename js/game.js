@@ -1,15 +1,20 @@
 class Game {
-  constructor(options, player){
+  constructor(options, player,canvasWidth,canvasHeight){
     this.ctx = options.ctx;
     this.player = player;
     this.interval = undefined;
+    this.intervalEntities = undefined;
     this.obstacle = [];
+    this.intervalEntitiesMove = undefined;
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
   }
 
   _drawPlayer() {
     this.ctx.fillStyle = this.player.color;
     this.ctx.fillRect(this.player.x, this.player.y, this.player.width, this.player.height);
   };
+
 
   _assignControlsToKeys() {
     document.addEventListener('keydown', e => {
@@ -27,43 +32,53 @@ class Game {
     });
   } 
 
-  everyInterval(n){
-    if ((this.interval / n) % 1 == 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  
 
   _generateObstacle() { 
-    for (let i = 0; i < 120; i++) {
-      //if (this.everyInterval(10)){
-        this.obstacle.push(new Obstacle(50, 50, 130, -100, 200));
-        this.obstacle[i].y += 1;
-      //}
-    }
+    this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, 200));
+    console.log(this.obstacle);
   };
 
 
-  /*
-  updateObstacle(){
-    this.interval = setInterval(this._drawObstacle.bind(this), 100);
+  _moveObstacle(){
+   this.intervalEntitiesMove = setInterval(() => {
+    for (let i = 0; i < this.obstacle.length; i++) {
+        this.obstacle[i].y += 1;
+      }
+      // Borrar elementos que estan por debajo del height.
+   }, 1); 
+  };
+
+  _deleteObstacles(){
+      if (this.obstacle < this.canvasHeight){
+        this.obstacle.unshift();
+      }
   }
-  */
+
+
+  _getRandomNumber(max){
+    return Math.floor(Math.random() * (max - 0)) + 0;  
+  };
+
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
       this.ctx.fillStyle = element.color;
       this.ctx.fillRect(element.x, element.y, element.width, element.height);
     });
-  }
+  };
 
- // setInterval(_drawObstacle, 10);
 
-  // CUANDO SE PINTAN LAS FUNCIONES
+
+  // Bucles 
 
   start(){
     this._assignControlsToKeys();
+    this.intervalEntities = setInterval(() => {
+      this._generateObstacle();
+      console.log("Generate object");
+    }, 1500);
+    this._moveObstacle();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
@@ -73,13 +88,11 @@ class Game {
 
   _update() {
 
-    this._generateObstacle();
-    console.log("Generate object");
     this._clear();
     this._drawObstacle();
     this._drawPlayer();
-    //this.updateObstacle();
-    //console.log("Update Area") 
+    this._deleteObstacles()
+
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
     }
