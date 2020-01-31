@@ -8,6 +8,7 @@ class Game {
     this.intervalEntitiesMove = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
+    this.intervalEntitiesDelete = undefined;
   }
 
   _drawPlayer() {
@@ -38,12 +39,12 @@ class Game {
     });
   } 
 
-  
+
 
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
       this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, 200));
-    }, 300);
+    }, 1000);
   };
 
 
@@ -52,19 +53,51 @@ class Game {
     for (let i = 0; i < this.obstacle.length; i++) {
         this.obstacle[i].y += 1;
         this._deleteObstacles();
-        console.log("delete object execute")
+        console.log("return true");
       }
-      //this._deleteObstacles();
    }, 1); 
   };
 
+
   _deleteObstacles(){
-    this.obstacle.forEach(element => {
-      if (this.canvasHeight < 300){
-        this.obstacle.unshift();
+    return this.obstacle.some((element) => {
+      if (element.y + element.height === this.canvasHeight){
+        this.obstacle.shift();
+
+        //return true;
+        console.log("return true");
       }
-    });
+    })
+   };
+
+  
+/*
+  _deleteObstacles(){
+      for (let i = 0; i < this.obstacle.length; i++){
+        if (this.obstacle[i].y = 200){
+          this.obstacle[i].shift();
+        }
+      }
+    }
+ */   
+  
+_collideWith(object){
+  let collide = true;
+  let myLeft = this.player.x;
+  let myRight = this.player.x + this.player.width;
+  let myTop = this.player.y;
+  let myBottom = this.player.y + this.player.height;
+  let objectLeft = object.x;
+  let objectRight = object.x + object.width;
+  let objetTop = object.y;
+  let objectBottom = object.y + object.height;
+
+  if ((myBottom < objetTop) || (myTop > objectBottom) ||
+  (myRight < objectLeft) || (myLeft > objectRight)) {
+    collide = false;
   }
+  return collide;
+}
 
 
   _getRandomNumber(max){
@@ -85,8 +118,9 @@ class Game {
 
   start(){
     this._assignControlsToKeys();
-    //this._generateObstacle();
+    this._generateObstacle();
     this._moveObstacle();
+    //this._deleteObstacles();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
@@ -99,7 +133,8 @@ class Game {
     this._clear();
     this._drawObstacle();
     this._drawPlayer();
-    //this._deleteObstacles()
+    //this._deleteObstacles();
+    this._collideWith(this.obstacle);
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
