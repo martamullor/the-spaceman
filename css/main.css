@@ -1,3 +1,28 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+.canvas-container {
+    justify-content: center; 
+    width: 100%;
+    display: flex;  
+}
+
 canvas {
+    border: 1px solid black;
+    justify-content: center;
+}
+
+#start-container {
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+#start {
+    justify-content: center;
     border: 2px solid black;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px 30px 10px 30px;
 }

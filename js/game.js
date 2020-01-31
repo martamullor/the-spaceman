@@ -10,6 +10,9 @@ class Game {
     this.canvasHeight = canvasHeight;
   }
 
+
+  // Player Elements
+
   _drawPlayer() {
     this.ctx.fillStyle = this.player.color;
     this.ctx.fillRect(this.player.x, this.player.y, this.player.width, this.player.height);
@@ -38,14 +41,13 @@ class Game {
     });
   } 
 
-
+// Obstacle Elements
 
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
       this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, 200));
     }, 1000);
   };
-
 
   _moveObstacle(){
    this.intervalEntitiesMove = setInterval(() => {
@@ -68,8 +70,6 @@ class Game {
     })
    };
 
-
-
    _collidesWithObstacle() {
     return this.obstacle.some((element) => {    
         if (
@@ -87,20 +87,12 @@ class Game {
         ) {
             this.obstacle.shift();
             this._stop();
-            //return true;
         }
         else {
             return false;
         }
     })
   }
-
-    
-
-  _getRandomNumber(max){
-    return Math.floor(Math.random() * (max - 0)) + 0;  
-  };
-
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
@@ -109,9 +101,15 @@ class Game {
     });
   };
 
+    
+
+  _getRandomNumber(max){
+    return Math.floor(Math.random() * (max - 0)) + 0;  
+  };
 
 
-  // Bucles 
+
+// BUCLES 
 
   start(){
     this._assignControlsToKeys();
@@ -121,12 +119,13 @@ class Game {
   }
 
 
-  // Función de limpiado
+  // Limpiado
+
   _clear(){
     this.ctx.clearRect(0,0,550,500);
   }
 
-  // Función stop
+  // Stop All
 
   _stop(){
     clearInterval(this.interval);
