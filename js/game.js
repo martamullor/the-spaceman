@@ -8,7 +8,6 @@ class Game {
     this.intervalEntitiesMove = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.intervalEntitiesDelete = undefined;
   }
 
   _drawPlayer() {
@@ -53,7 +52,9 @@ class Game {
     for (let i = 0; i < this.obstacle.length; i++) {
         this.obstacle[i].y += 1;
         this._deleteObstacles();
-        console.log("return true");
+        console.log("Element deleted");
+        this._collidesWithObstacle();
+        console.log("collide evaluated")
       }
    }, 1); 
   };
@@ -63,42 +64,38 @@ class Game {
     return this.obstacle.some((element) => {
       if (element.y + element.height === this.canvasHeight){
         this.obstacle.shift();
-
-        //return true;
-        console.log("return true");
       }
     })
    };
 
-  
-/*
-  _deleteObstacles(){
-      for (let i = 0; i < this.obstacle.length; i++){
-        if (this.obstacle[i].y = 200){
-          this.obstacle[i].shift();
+
+
+   _collidesWithObstacle() {
+    return this.obstacle.some((element) => {    
+        if (
+            element.y + element.height >= this.canvasHeight - this.player.height && 
+            (
+                (   // Left of the player
+                    element.x + element.width >= this.player.x &&
+                    element.x + element.width <= this.player.x + this.player.width
+                ) ||
+                (   // Right of the player
+                    this.player.x + this.player.height >= element.x &&
+                    this.player.x + this.player.height <= element.x + element.width
+                )
+            )
+        ) {
+            this.obstacle.shift();
+            this._stop();
+            //return true;
         }
-      }
-    }
- */   
-  
-_collideWith(object){
-  let collide = true;
-  let myLeft = this.player.x;
-  let myRight = this.player.x + this.player.width;
-  let myTop = this.player.y;
-  let myBottom = this.player.y + this.player.height;
-  let objectLeft = object.x;
-  let objectRight = object.x + object.width;
-  let objetTop = object.y;
-  let objectBottom = object.y + object.height;
-
-  if ((myBottom < objetTop) || (myTop > objectBottom) ||
-  (myRight < objectLeft) || (myLeft > objectRight)) {
-    collide = false;
+        else {
+            return false;
+        }
+    })
   }
-  return collide;
-}
 
+    
 
   _getRandomNumber(max){
     return Math.floor(Math.random() * (max - 0)) + 0;  
@@ -120,12 +117,22 @@ _collideWith(object){
     this._assignControlsToKeys();
     this._generateObstacle();
     this._moveObstacle();
-    //this._deleteObstacles();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
+
+  // Función de limpiado
   _clear(){
     this.ctx.clearRect(0,0,550,500);
+  }
+
+  // Función stop
+
+  _stop(){
+    clearInterval(this.interval);
+    clearInterval(this.intervalEntities);
+    clearInterval(this.intervalEntitiesMove);
+
   }
 
   _update() {
@@ -133,8 +140,6 @@ _collideWith(object){
     this._clear();
     this._drawObstacle();
     this._drawPlayer();
-    //this._deleteObstacles();
-    this._collideWith(this.obstacle);
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
