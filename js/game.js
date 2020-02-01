@@ -24,7 +24,7 @@ class Game {
 
   _gameOver(){
     if (this.time === 0){
-      this.stop();
+      this._stop();
       this._printGameOver();
     }
   }
@@ -36,7 +36,8 @@ class Game {
     gameOverTitle.style = "display:block";
     const gameOverText = document.getElementById('gameOverText');
     gameOverText.style = "display:block";
-    canvas.style = "display:none"
+    canvas.style = "display:none";
+    time.style = "display:none";
   }
 
   

@@ -30,14 +30,16 @@ class Obstacle {
    */ 
 }
 
-// class Enemy extends Obstacle {
-//     constructor(width, height, x, y, speed){
-//       super(width,height, x, y, speed);
-//       this.type = "enemy";
-//       this.color = "red";
-//       this.imageEnemy = undefined;
-//     } 
-// }
+/*
+ class Enemy extends Obstacle {
+     constructor(width, height, x, y, speed){
+       super(width,height, x, y, speed);
+       this.type = "enemy";
+       this.imageEnemy = undefined;
+     } 
+ }
+
+ */
 
 // class Oxygen extends Obstacle {
 //   constructor(width, height, x, y, speed){

@@ -1,3 +1,39 @@
+*{
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.body-container {
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#img-start{
+    padding: 20px;
+}
+
+.image-character {
+    height: 400px;
+}
+
+
+#start {
+    font-size: 30px;
+    color: white;
+    background-color: black;
+    padding: 10px;
+}
+
+#start:hover {
+    color: black;
+    background-color: white;
+    border: 3px solid black;
+}
+
 
 
 canvas {

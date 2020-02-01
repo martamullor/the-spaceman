@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       const startButton = document.getElementById("start");
       startButton.style = "display: none";
+      const startImage = document.getElementById("img-start")
+      startImage.style = "display: none"
       const time = document.getElementById("time");
       time.style = "display: block"
     }
