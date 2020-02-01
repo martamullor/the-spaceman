@@ -10,14 +10,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     canvas.width-50, 
     canvas.height);
 
-
   
     function start(){
       canvas.style = "display:block";
       game.start();
 
       const startButton = document.getElementById("start");
-      startButton.style = "display: none"
+      startButton.style = "display: none";
     }
     
     console.log("Game start");

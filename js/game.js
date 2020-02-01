@@ -8,6 +8,15 @@ class Game {
     this.intervalEntitiesMove = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
+    this.time = 300;
+  }
+
+  // Score 
+
+  _drawTime(){
+    let time = document.getElementById("segundos");
+    console.log(`The time is ${this.time}`);
+    time.innerHTML = this.time;
   }
 
 
@@ -47,20 +56,17 @@ class Game {
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
       this.obstacle.push(new Obstacle(70, 70, this._getRandomNumber(this.canvasWidth), 0, 200));
+      this.time -= 2; 
       //this.obstacle.push(new Oxygen(20, 20, this._getRandomNumber(this.canvasWidth), 0, 50));
     }, 1000);
   };
 
   _moveObstacle(){
-  //  this.intervalEntitiesMove = setInterval(() => {
     for (let i = 0; i < this.obstacle.length; i++) {
         this.obstacle[i].y += 2;
         this._deleteObstacles();
-        // console.log("Element deleted");
         this._collidesWithObstacle();
-        // console.log("collide evaluated")
       }
-  //  }, 1); 
   };
 
 
@@ -82,7 +88,7 @@ class Game {
                 ||
                 (this.player.x + this.player.height >= element.x &&
                 this.player.x + this.player.height <= element.x + element.width)
-            )) {
+            )) { 
             this.obstacle.splice(position, 1);
             this._stop();
         }
@@ -137,6 +143,7 @@ class Game {
     this._drawObstacle();
     this._drawPlayer();
     this._moveObstacle();
+    this._drawTime();
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
