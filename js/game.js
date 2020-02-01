@@ -20,6 +20,14 @@ class Game {
   }
 
 
+  // GameOver 
+
+  _gameOver(){
+    if (this.time === 0){
+      this.stop();
+    }
+  }
+
   // Player Elements
 
   _drawPlayer() {
@@ -56,7 +64,7 @@ class Game {
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
       this.obstacle.push(new Obstacle(70, 70, this._getRandomNumber(this.canvasWidth), 0, 200));
-      this.time -= 2; 
+      this.time -= 50; 
       //this.obstacle.push(new Oxygen(20, 20, this._getRandomNumber(this.canvasWidth), 0, 50));
     }, 1000);
   };
@@ -144,6 +152,7 @@ class Game {
     this._drawPlayer();
     this._moveObstacle();
     this._drawTime();
+    this._gameOver()
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));
