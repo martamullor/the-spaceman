@@ -11,7 +11,7 @@ class Game {
     this.time = 300;
   }
 
-  // Score 
+  // Time 
 
   _drawTime(){
     let time = document.getElementById("segundos");
@@ -25,9 +25,21 @@ class Game {
   _gameOver(){
     if (this.time === 0){
       this.stop();
+      this._printGameOver();
     }
   }
 
+  _printGameOver() {
+    const gameOver = document.getElementById('gameOver');
+    gameOver.style = "display:block";
+    const gameOverTitle = document.getElementById('gameOverTitle');
+    gameOverTitle.style = "display:block";
+    const gameOverText = document.getElementById('gameOverText');
+    gameOverText.style = "display:block";
+    canvas.style = "display:none"
+  }
+
+  
   // Player Elements
 
   _drawPlayer() {
@@ -69,6 +81,7 @@ class Game {
     }, 1000);
   };
 
+
   _moveObstacle(){
     for (let i = 0; i < this.obstacle.length; i++) {
         this.obstacle[i].y += 2;
@@ -99,15 +112,18 @@ class Game {
             )) { 
             this.obstacle.splice(position, 1);
             this._stop();
+            this._printGameOver();
         }
     })
   }
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
-      this.obstacle.image = new Image();
-      this.obstacle.image.src = "../img/enemy.png";
-      this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
+      //if (this.obstacle.type === "enemy"){
+        this.obstacle.image = new Image();
+        this.obstacle.image.src = "../img/enemy.png";
+        this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
+      //}
     });
   };
 
@@ -152,7 +168,7 @@ class Game {
     this._drawPlayer();
     this._moveObstacle();
     this._drawTime();
-    this._gameOver()
+    this._gameOver();
 
     if (!!this.interval) {
       this.interval = window.requestAnimationFrame(this._update.bind(this));

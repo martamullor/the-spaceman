@@ -12,16 +12,22 @@ class Obstacle {
     }
     
     /*
-    _generateRandom () {
+    _generateRandom() {
       const types = [{name: 'enemy', color: 'red'}, {name: 'oxygen', color: 'red'}]
       
-      // funcion random que me de un de los elementos de la array
+      // funcion random que me de uno de los elementos de la array
 
-      this.type = e.name
-      this.color = e.color
-      this.effect = +1
+      random(types){
+        obstacle = types[Math.floor(Math.random()* types.length)];
+        this.type = obstacle.name;
+        this.color = obstacle.color;
+      }
+
+      //this.type = e.name
+      //this.color = e.color
+      //this.effect = +1
     }
-    */
+   */ 
 }
 
 // class Enemy extends Obstacle {
