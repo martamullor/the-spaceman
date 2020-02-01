@@ -1,11 +1,11 @@
 body{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
-.canvas-container {
+
+.container {
     justify-content: center; 
-    width: 100%;
-    display: flex;  
+    display: flex; 
 }
 
 canvas {

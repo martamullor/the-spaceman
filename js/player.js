@@ -6,6 +6,7 @@ class Player {
     this.x = x;
     this.y = y;
     this.color = "green";
+    this.image = undefined;
     //this.intervalId = undefined;
   }
 

@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
   ctx = canvas.getContext('2d');
 
   const startButton = document.getElementById('start');
-  startButton.addEventListener('click', start); 
-  
+  startButton.addEventListener('click', startGame); 
+
 
   
-    function start() {
+    function startGame() {
 
         game = new Game({ctx}, 
-          new Player(40,40,250,450), 
-          canvas.offsetWidth-50, 
+          new Player(60,60,250,420), 
+          canvas.offsetWidth-70, 
           canvas.offsetHeight);
 
 
@@ -23,9 +23,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
 
 
-    console.log("Game start")
-
-
-
-
+    console.log("Game start");
 })
