@@ -15,7 +15,7 @@ class Game {
 
   _drawPlayer() {
     this.player.image = new Image();
-    this.player.image.src = '/img/astronaut.png';
+    this.player.image.src = './img/astronaut.png';
     this.ctx.drawImage( this.player.image, this.player.x, this.player.y, this.player.width, this.player.height);
   };
 
@@ -92,7 +92,7 @@ class Game {
   _drawObstacle() {  
     this.obstacle.forEach(element => {
       this.obstacle.image = new Image();
-      this.obstacle.image.src = "img/enemy.png"
+      this.obstacle.image.src = "./img/enemy.png"
       this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
     });
   };
