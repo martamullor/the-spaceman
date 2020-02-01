@@ -92,7 +92,7 @@ class Game {
   _drawObstacle() {  
     this.obstacle.forEach(element => {
       this.obstacle.image = new Image();
-      this.obstacle.image.src = "../img/enemy.png"
+      this.obstacle.image.src = "../img/enemy.png";
       this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
     });
   };
