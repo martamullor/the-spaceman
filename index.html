@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Spaceman</title>
-    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,700&display=swap" rel="stylesheet">    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="body-container">
 
 
     <div class = "buttons">
         <div id="img-start" style="display: block;">
+            <h1 class="title-start-screen">The <br> Spaceman</h1>
             <img class="image-character" src="./img/start-image.gif" alt="space-guy">
         </div>
-        <button id="start" style="display: block;">Start Game</button>
+        <button class = "start-button" id="start" style="display: block;">START GAME</button>
     </div>
 
     <div id = time style="display: none;">
@@ -27,10 +27,11 @@
     </div>
 
     <section id="gameOver" style="display: none;">
-            <div class="game-over-background">
-              <h2 id="gameOverTitle"> GAME OVER</h2>
-              <p id="gameOverText"> If I want to put text</p>
-            </div>
+        <div class="game-over-background">
+            <h2 id="gameOverTitle"> GAME OVER</h2>
+            <p id="gameOverText"> If I want to put text</p>
+        </div>
+        <button id="tryAgain">TRY AGAIN</button>
     </section>
 
 
@@ -40,6 +41,7 @@
 
     <script src="js/player.js"></script>
     <script src="js/obstacle.js"></script>
+    <script src="js/background.js"></script>
     <script src="js/game.js"></script>
     <script src="js/main.js"></script>
     

@@ -1,11 +1,13 @@
 class Game {
-  constructor(options, player,canvasWidth,canvasHeight){
+  constructor(options, player,background,canvasWidth,canvasHeight){
     this.ctx = options.ctx;
     this.player = player;
+    this.background = background;
     this.interval = undefined;
     this.intervalEntities = undefined;
     this.obstacle = [];
     this.intervalEntitiesMove = undefined;
+    this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
     this.time = 300;
@@ -36,6 +38,7 @@ class Game {
     }
   }
 
+
   _printGameOver() {
     const gameOver = document.getElementById('gameOver');
     gameOver.style = "display:block";
@@ -47,6 +50,35 @@ class Game {
     time.style = "display:none";
     points.style = "display:none";
   }
+
+
+  // Background 
+
+  _drawBackground() {
+      this.background.image = new Image();
+      this.background.image.src = "../img/background.jpg";
+      this.ctx.drawImage( this.background.image, this.background.x, this.background.y, this.background.width, this.background.height);
+  };
+
+  _moveBackground() { 
+    this.intervalEntities = setInterval(() => {
+      if (this.background.y === this.canvasHeight){
+        this.background.y = 0;
+      } else {
+        this.background.y -= 5;
+      }
+    }, 500);
+  };
+
+  
+
+  _moveObstacle(){
+    for (let i = 0; i < this.obstacle.length; i++) {
+        this.obstacle[i].y += 2;
+        this._deleteObstacles();
+        this._collidesWithObstacle();
+      }
+  };
 
   
   // Player Elements
@@ -165,7 +197,8 @@ class Game {
   start(){
     this._assignControlsToKeys();
     this._generateObstacle();
-    this._generateOxygen()
+    this._generateOxygen();
+    this._moveBackground();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
@@ -190,6 +223,7 @@ class Game {
   _update() {
 
     this._clear();
+    this._drawBackground();
     this._drawObstacle();
     this._drawPlayer();
     this._moveObstacle();

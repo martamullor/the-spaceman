@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   ctx = canvas.getContext('2d');
 
   game = new Game({ctx}, 
-    new Player(60,60,250,420), 
+    new Player(60,60,250,420),
+    new Background(1050,1000,0,0), 
     canvas.width-50, 
     canvas.height);
 
@@ -29,4 +30,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const startButton = document.getElementById("start");
     startButton.addEventListener("click", start);
+
+    // Restart 
+
+    const tryAgain = document.getElementById("tryAgain");
+    tryAgain.addEventListener("click", start);
 });

@@ -6,6 +6,15 @@
     text-align: center;
 }
 
+.title-start-screen {
+    position: absolute;
+    top: 15%;
+    left: 65%;
+    font-size: 55px;
+    text-align: left;
+    font-weight: 400;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
@@ -21,17 +30,18 @@
 }
 
 
-#start {
+.start-button {
     font-size: 30px;
     color: white;
     background-color: black;
     padding: 10px;
 }
 
-#start:hover {
+.start-button:hover {
     color: black;
     background-color: white;
     border: 3px solid black;
+    font-weight: 600;
 }
 
 
