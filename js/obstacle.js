@@ -6,8 +6,6 @@ class Obstacle {
       this.y = y;
       this.speed = speed;
       this.type = type;
-      this.color = undefined;
-      this.effect = undefined
       this.interval = undefined;
     }
     

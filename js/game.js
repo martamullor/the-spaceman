@@ -116,7 +116,7 @@ class Game {
 
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(70, 70, this._getRandomNumber(this.canvasWidth), 0, 300, "enemy"));
+      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, 300, "enemy"));
       this.time -= 5; 
     }, 1000);
   };
@@ -141,7 +141,7 @@ class Game {
 
   _deleteObstacles(){
     this.obstacle.forEach((element) => {
-      if (element.y + element.height === this.canvasHeight){
+      if (element.y + element.height === this.canvasHeight+50){
         this.obstacle.shift();
       }
     })
