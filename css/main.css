@@ -9,11 +9,11 @@
 .title-start-screen {
     position: absolute;
     top: 15%;
-    left: 68%;
-    font-size: 60px;
+    left: 60%;
+    font-size: 90px;
     text-align: left;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 70px;
 }
 
 .buttons {
@@ -28,6 +28,7 @@
 
 .image-character {
     height: 400px;
+    padding-right: 150px;
 }
 
 
