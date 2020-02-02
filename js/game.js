@@ -65,9 +65,9 @@ class Game {
       if (this.background.y === this.canvasHeight){
         this.background.y = 0;
       } else {
-        this.background.y -= 5;
+        this.background.y -= 2;
       }
-    }, 500);
+    }, 50);
   };
 
   

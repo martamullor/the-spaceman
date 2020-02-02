@@ -57,12 +57,28 @@ canvas {
     margin: 40px
 }
 
-#gameOver {
-    border: 3px solid green;
-}
+
 
 #gameOverTitle {
     font-size: 85px;
+}
+
+#gameOverText {
+    margin-top: -50px;
+    font-size: 25px;
+}
+
+#tryAgain {
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    padding: 10px 40px 10px 40px;
+}
+
+#tryAgain:hover {
+    background-color: white;
+    border: 3px solid black;
+    color: black;
 }
 
 
