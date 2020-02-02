@@ -124,7 +124,7 @@ class Game {
 
   _generateOxygen() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(40, 40, this._getRandomNumber(this.canvasWidth), 0, 100, "oxygen"));
+      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, 100, "oxygen"));
     }, 3000);
   };
 
