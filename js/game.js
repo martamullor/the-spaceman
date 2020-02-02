@@ -5,11 +5,11 @@ class Game {
     this.interval = undefined;
     this.intervalEntities = undefined;
     this.obstacle = [];
-    this.oxygen = [];
     this.intervalEntitiesMove = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
     this.time = 300;
+    this.points = 0;
   }
 
   // Time 
@@ -18,6 +18,12 @@ class Game {
     let time = document.getElementById("segundos");
     console.log(`The time is ${this.time}`);
     time.innerHTML = this.time;
+  }
+
+  _drawPoints(){
+    let points = document.getElementById("number");
+    console.log(`The points is ${this.points}`);
+    points.innerHTML = this.points;
   }
 
 
@@ -39,6 +45,7 @@ class Game {
     gameOverText.style = "display:block";
     canvas.style = "display:none";
     time.style = "display:none";
+    points.style = "display:none";
   }
 
   
@@ -85,8 +92,7 @@ class Game {
 
   _generateOxygen() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(30, 30, this._getRandomNumber(this.canvasWidth), 0, 200, "oxygen"));
-      this.time -= 5; 
+      this.obstacle.push(new Obstacle(40, 40, this._getRandomNumber(this.canvasWidth), 0, 200, "oxygen"));
     }, 3000);
   };
 
@@ -120,12 +126,18 @@ class Game {
                 (this.player.x + this.player.height >= element.x &&
                 this.player.x + this.player.height <= element.x + element.width)
             )) { 
-            this.obstacle.splice(position, 1);
-            this._stop();
-            this._printGameOver();
+            if (element.type === "enemy"){
+              this._stop();
+              this._printGameOver();
+            } else {
+              this.points += 5;
+              this.time += 10;
+              this.obstacle.splice(position, 1);
+            }
         }
     })
-  }
+  };
+
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
@@ -154,7 +166,6 @@ class Game {
     this._assignControlsToKeys();
     this._generateObstacle();
     this._generateOxygen()
-    // this._moveObstacle();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
 
@@ -183,6 +194,7 @@ class Game {
     this._drawPlayer();
     this._moveObstacle();
     this._drawTime();
+    this._drawPoints();
     this._gameOver();
 
     if (!!this.interval) {

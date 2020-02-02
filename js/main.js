@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const startImage = document.getElementById("img-start")
       startImage.style = "display: none";
       const time = document.getElementById("time");
-      time.style = "display: block"
+      time.style = "display: block";
+      const points = document.getElementById("points");
+      points.style = "display: block";
     }
     
     console.log("Game start");
