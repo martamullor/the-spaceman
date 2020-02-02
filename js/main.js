@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   game = new Game({ctx}, 
     new Player(60,60,250,420),
-    new Background(550,3130,0,0), 
+    new Background(886,3130,0,0), 
     canvas.width-50, 
     canvas.height);
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         game = new Game({ctx}, 
           new Player(60,60,250,420),
-          new Background(550,3130,0,0), 
+          new Background(886,3130,0,0), 
           canvas.width-50, 
           canvas.height);
       

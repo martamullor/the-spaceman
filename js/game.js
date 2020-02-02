@@ -206,7 +206,7 @@ class Game {
   // Limpiado
 
   _clear(){
-    this.ctx.clearRect(0,0,550,500);
+    this.ctx.clearRect(0,0,886,500);
   }
 
   // Stop All
