@@ -9,10 +9,11 @@
 .title-start-screen {
     position: absolute;
     top: 15%;
-    left: 65%;
-    font-size: 55px;
+    left: 60%;
+    font-size: 60px;
     text-align: left;
-    font-weight: 400;
+    font-weight: 600;
+    line-height: 50px;
 }
 
 .buttons {

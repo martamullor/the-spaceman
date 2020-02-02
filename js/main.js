@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   game = new Game({ctx}, 
     new Player(60,60,250,420),
-    new Background(1050,1000,0,0), 
+    new Background(550,3130,0,0), 
     canvas.width-50, 
     canvas.height);
 
@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const points = document.getElementById("points");
       points.style = "display: block";
     }
+
+    function restart(){
+      canvas.style = "display:block";
+      game.start();
+    }
+    
     
     console.log("Game start");
 
@@ -34,5 +40,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Restart 
 
     const tryAgain = document.getElementById("tryAgain");
-    tryAgain.addEventListener("click", start);
+    tryAgain.addEventListener("click", restart);
 });
