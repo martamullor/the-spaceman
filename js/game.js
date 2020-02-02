@@ -5,6 +5,7 @@ class Game {
     this.interval = undefined;
     this.intervalEntities = undefined;
     this.obstacle = [];
+    this.oxygen = [];
     this.intervalEntitiesMove = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
@@ -76,12 +77,20 @@ class Game {
 
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(70, 70, this._getRandomNumber(this.canvasWidth), 0, 200));
-      this.time -= 50; 
-      //this.obstacle.push(new Oxygen(20, 20, this._getRandomNumber(this.canvasWidth), 0, 50));
+      this.obstacle.push(new Obstacle(70, 70, this._getRandomNumber(this.canvasWidth), 0, 300, "enemy"));
+      this.time -= 5; 
     }, 1000);
   };
 
+
+  _generateOxygen() { 
+    this.intervalEntities = setInterval(() => {
+      this.obstacle.push(new Obstacle(30, 30, this._getRandomNumber(this.canvasWidth), 0, 200, "oxygen"));
+      this.time -= 5; 
+    }, 3000);
+  };
+
+  
 
   _moveObstacle(){
     for (let i = 0; i < this.obstacle.length; i++) {
@@ -120,11 +129,15 @@ class Game {
 
   _drawObstacle() {  
     this.obstacle.forEach(element => {
-      //if (this.obstacle.type === "enemy"){
+      if (element.type === "enemy"){
         this.obstacle.image = new Image();
         this.obstacle.image.src = "../img/enemy.png";
         this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
-      //}
+      } else {
+        this.obstacle.image = new Image();
+        this.obstacle.image.src = "../img/oxygen.png";
+        this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
+      }
     });
   };
 
@@ -140,6 +153,7 @@ class Game {
   start(){
     this._assignControlsToKeys();
     this._generateObstacle();
+    this._generateOxygen()
     // this._moveObstacle();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   }
