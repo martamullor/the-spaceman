@@ -28,7 +28,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function restart(){
       canvas.style = "display:block";
+
+        game = new Game({ctx}, 
+          new Player(60,60,250,420),
+          new Background(550,3130,0,0), 
+          canvas.width-50, 
+          canvas.height);
+      
       game.start();
+
+      gameOver.style = "display:none";
+      gameOverTitle.style = "display:none";
+      gameOverText.style = "display:none";
+      time.style = "display:block";
+      points.style = "display:block";
+
+      console.log("restart function")
     }
     
     
@@ -41,4 +56,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const tryAgain = document.getElementById("tryAgain");
     tryAgain.addEventListener("click", restart);
+
+    console.log("Try again activated")
 });

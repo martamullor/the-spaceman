@@ -14,7 +14,7 @@ class Game {
     this.points = 0;
   }
 
-  // Time 
+  // Time & Points
 
   _drawTime(){
     let time = document.getElementById("segundos");
@@ -124,7 +124,7 @@ class Game {
 
   _generateOxygen() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(40, 40, this._getRandomNumber(this.canvasWidth), 0, 200, "oxygen"));
+      this.obstacle.push(new Obstacle(40, 40, this._getRandomNumber(this.canvasWidth), 0, 100, "oxygen"));
     }, 3000);
   };
 

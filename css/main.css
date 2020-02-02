@@ -9,8 +9,8 @@
 .title-start-screen {
     position: absolute;
     top: 15%;
-    left: 60%;
-    font-size: 60px;
+    left: 68%;
+    font-size: 55px;
     text-align: left;
     font-weight: 600;
     line-height: 50px;
@@ -45,10 +45,24 @@
     font-weight: 600;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+}
 
 
 canvas {
-    border: 1px solid black;
+    border: 4px solid black;
+    border-radius: 20px;
+    margin: 40px
+}
+
+#gameOver {
+    border: 3px solid green;
+}
+
+#gameOverTitle {
+    font-size: 85px;
 }
 
 
