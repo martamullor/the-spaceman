@@ -56,7 +56,7 @@ class Game {
 
   _drawBackground() {
       this.background.image = new Image();
-      this.background.image.src = "../img/background.jpg";
+      this.background.image.src = "./img/background.jpg";
       this.ctx.drawImage( this.background.image, this.background.x, this.background.y, this.background.width, this.background.height);
   };
 
@@ -85,7 +85,7 @@ class Game {
 
   _drawPlayer() {
     this.player.image = new Image();
-    this.player.image.src = "../img/astronaut.png";
+    this.player.image.src = "./img/astronaut.png";
     this.ctx.drawImage( this.player.image, this.player.x, this.player.y, this.player.width, this.player.height);
   };
 
@@ -175,11 +175,11 @@ class Game {
     this.obstacle.forEach(element => {
       if (element.type === "enemy"){
         this.obstacle.image = new Image();
-        this.obstacle.image.src = "../img/enemy.png";
+        this.obstacle.image.src = "./img/enemy.png";
         this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
       } else {
         this.obstacle.image = new Image();
-        this.obstacle.image.src = "../img/oxygen.png";
+        this.obstacle.image.src = "./img/oxygen.png";
         this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
       }
     });
