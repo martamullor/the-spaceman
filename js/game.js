@@ -6,12 +6,12 @@ class Game {
     this.interval = undefined;
     this.intervalEntities = undefined;
     this.obstacle = [];
-    this.intervalEntitiesMove = undefined;
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
     this.time = 300;
     this.points = 0;
+    this.pause = false;
   }
 
   // Time & Points
@@ -96,6 +96,10 @@ class Game {
           if (this.player.x > this.canvasWidth){
             this.player.x = this.canvasWidth; 
           } 
+          break;
+        case 80: // letter p 
+          this._pause();
+          this.pause = !this.pause;
           break;
       }
     });
@@ -207,6 +211,18 @@ class Game {
     clearInterval(this.intervalEntities);
 
   }
+
+  // Pause 
+
+  _pause() {
+    if (!this.pause) {
+      window.cancelAnimationFrame(this.interval);
+    } else if (this.pause) {
+      this.interval = window.requestAnimationFrame(this._update.bind(this));
+    }
+  };
+
+  // Update function
 
   _update() {
 
