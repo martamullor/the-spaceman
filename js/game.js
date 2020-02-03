@@ -12,6 +12,7 @@ class Game {
     this.canvasHeight = canvasHeight;
     this.time = 300;
     this.points = 0;
+    this.lifes = 3;
   }
 
   // Time & Points
@@ -26,6 +27,12 @@ class Game {
     let points = document.getElementById("number");
     console.log(`The points is ${this.points}`);
     points.innerHTML = this.points;
+  }
+
+  _drawLifes(){
+    let lifes = document.getElementById("lifes-number");
+    console.log(`The points is ${this.lifes}`);
+    lifes.innerHTML = this.lifes;
   }
 
 
@@ -49,6 +56,7 @@ class Game {
     canvas.style = "display:none";
     time.style = "display:none";
     points.style = "display:none";
+    lifes.style = "display: none";
   }
 
 
@@ -69,16 +77,7 @@ class Game {
       }
     }, 50);
   };
-
   
-
-  _moveObstacle(){
-    for (let i = 0; i < this.obstacle.length; i++) {
-        this.obstacle[i].y += 2;
-        this._deleteObstacles();
-        this._collidesWithObstacle();
-      }
-  };
 
   
   // Player Elements
@@ -125,10 +124,9 @@ class Game {
   _generateOxygen() { 
     this.intervalEntities = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, 100, "oxygen"));
-    }, 2500);
+    }, 2300);
   };
 
-  
 
   _moveObstacle(){
     for (let i = 0; i < this.obstacle.length; i++) {
@@ -229,6 +227,7 @@ class Game {
     this._moveObstacle();
     this._drawTime();
     this._drawPoints();
+    this._drawLifes()
     this._gameOver();
 
     if (!!this.interval) {

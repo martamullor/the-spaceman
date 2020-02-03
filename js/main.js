@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       time.style = "display: block";
       const points = document.getElementById("points");
       points.style = "display: block";
+      const lifes = document.getElementById("lifes");
+      lifes.style = "display: block";
     }
 
     function restart(){
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       gameOverText.style = "display:none";
       time.style = "display:block";
       points.style = "display:block";
+      lifes.style = "display: block";
 
       console.log("restart function")
     }
