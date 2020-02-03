@@ -12,7 +12,6 @@ class Game {
     this.canvasHeight = canvasHeight;
     this.time = 300;
     this.points = 0;
-    this.lifes = 3;
   }
 
   // Time & Points
@@ -48,7 +47,6 @@ class Game {
     canvas.style = "display:none";
     time.style = "display:none";
     points.style = "display:none";
-    lifes.style = "display: none";
   }
 
 

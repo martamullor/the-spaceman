@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       time.style = "display: block";
       const points = document.getElementById("points");
       points.style = "display: block";
-      const lifes = document.getElementById("lifes");
-      lifes.style = "display: block";
     }
 
     function restart(){
