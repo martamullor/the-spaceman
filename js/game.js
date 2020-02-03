@@ -29,12 +29,6 @@ class Game {
     points.innerHTML = this.points;
   }
 
-  _drawLifes(){
-    let lifes = document.getElementById("lifes-number");
-    console.log(`The points is ${this.lifes}`);
-    lifes.innerHTML = this.lifes;
-  }
-
 
   // GameOver 
 
@@ -227,7 +221,6 @@ class Game {
     this._moveObstacle();
     this._drawTime();
     this._drawPoints();
-    this._drawLifes()
     this._gameOver();
 
     if (!!this.interval) {

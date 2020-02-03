@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       gameOverText.style = "display:none";
       time.style = "display:block";
       points.style = "display:block";
-      lifes.style = "display: block";
 
       console.log("restart function")
     }
