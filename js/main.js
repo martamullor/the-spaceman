@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       gameOver.style = "display:none";
       gameOverTitle.style = "display:none";
-      gameOverText.style = "display:none";
       time.style = "display:block";
       points.style = "display:block";
 

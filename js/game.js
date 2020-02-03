@@ -45,8 +45,6 @@ class Game {
     gameOver.style = "display:block";
     const gameOverTitle = document.getElementById('gameOverTitle');
     gameOverTitle.style = "display:block";
-    const gameOverText = document.getElementById('gameOverText');
-    gameOverText.style = "display:block";
     canvas.style = "display:none";
     time.style = "display:none";
     points.style = "display:none";
