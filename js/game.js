@@ -4,12 +4,13 @@ class Game {
     this.player = player;
     this.background = background;
     this.interval = undefined;
-    this.intervalEntities = undefined;
+    this.intervalEnemies = undefined;
+    this.intervalOxygen = undefined;
     this.obstacle = [];
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.time = 60;
+    this.time = 120;
     this.points = 0;
     this.pause = false;
   }
@@ -59,8 +60,8 @@ class Game {
   };
 
   _moveBackground() { 
-    this.intervalEntities = setInterval(() => {
-      if (this.background.y === this.canvasHeight){
+    this.intervalBackground = setInterval(() => {
+      if (this.background.y < -this.canvasHeight){
         this.background.y = 0;
       } else {
         this.background.y -= 2;
@@ -97,7 +98,7 @@ class Game {
             this.player.x = this.canvasWidth; 
           } 
           break;
-        case 32: // letter p 
+        case 32: // space 
           this._pause();
           this.pause = !this.pause;
           break;
@@ -108,7 +109,7 @@ class Game {
 // Obstacle Elements
 
   _generateObstacle() { 
-    this.intervalEntities = setInterval(() => {
+    this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
       this.time -= 5; 
     }, 1000);
@@ -116,7 +117,7 @@ class Game {
 
 
   _generateOxygen() { 
-    this.intervalEntities = setInterval(() => {
+    this.intervalOxygen = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
     }, 1500);
   };
@@ -192,35 +193,42 @@ class Game {
     this._generateOxygen();
     this._moveBackground();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
-  }
+  };
 
 
   // Limpiado
 
   _clear(){
     this.ctx.clearRect(0,0,886,500);
-  }
+  };
 
   // Stop All
 
   _stop(){
     console.log('stop');
-    this.interval = clearInterval(this.interval);
-    this.interval = undefined;
+    this.interval = clearInterval(this.interval);    
+    this.intervalEnemies = clearInterval(this.intervalEnemies);
+    this.intervalOxygen = clearInterval(this.intervalOxygen);
     
-    clearInterval(this.intervalEntities);
-
-  }
+  };
 
   // Pause 
 
+
   _pause() {
+    console.log('this.pause :', this.pause);
     if (!this.pause) {
-      window.cancelAnimationFrame(this.interval);
+      console.log("pause active")
+      this.intervalEnemies = clearInterval(this.intervalEnemies);
+      this.intervalOxygen = clearInterval(this.intervalOxygen);
+      this.interval = window.cancelAnimationFrame(this.interval);
     } else if (this.pause) {
-      this.interval = window.requestAnimationFrame(this._update.bind(this));
+      console.log("pause inactive")
+      this.start()
+      // this.interval = window.requestAnimationFrame(this._update.bind(this));
     }
   };
+ 
 
   // Update function
 
