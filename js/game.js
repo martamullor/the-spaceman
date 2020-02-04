@@ -9,7 +9,7 @@ class Game {
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.time = 300;
+    this.time = 60;
     this.points = 0;
     this.pause = false;
   }
@@ -18,13 +18,13 @@ class Game {
 
   _drawTime(){
     let time = document.getElementById("segundos");
-    console.log(`The time is ${this.time}`);
+    //console.log(`The time is ${this.time}`);
     time.innerHTML = this.time;
   }
 
   _drawPoints(){
     let points = document.getElementById("number");
-    console.log(`The points is ${this.points}`);
+    //console.log(`The points is ${this.points}`);
     points.innerHTML = this.points;
   }
 
@@ -97,7 +97,7 @@ class Game {
             this.player.x = this.canvasWidth; 
           } 
           break;
-        case 80: // letter p 
+        case 32: // letter p 
           this._pause();
           this.pause = !this.pause;
           break;
@@ -109,7 +109,7 @@ class Game {
 
   _generateObstacle() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, 300, "enemy"));
+      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
       this.time -= 5; 
     }, 1000);
   };
@@ -117,8 +117,8 @@ class Game {
 
   _generateOxygen() { 
     this.intervalEntities = setInterval(() => {
-      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, 100, "oxygen"));
-    }, 2700);
+      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
+    }, 1500);
   };
 
 
