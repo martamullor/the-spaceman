@@ -13,6 +13,16 @@ class Game {
     this.time = 95;
     this.points = 0;
     this.pause = false;
+    this.enemiesSound = new Audio();
+    this.enemiesSound.src = './sound/enemiesSound.mp4';
+    this.oxygenSound = new Audio();
+    this.oxygenSound.src = "./sound/oxygenSound.mp3";
+  }
+
+  // Sound 
+
+  _enemiesSound(){
+
   }
 
   // Time & Points
@@ -152,11 +162,13 @@ class Game {
                 this.player.x + this.player.height <= element.x + element.width)
             )) { 
             if (element.type === "enemy"){
+              this.enemiesSound.play();
               this._stop();
               this._printGameOver();
             } else {
               this.points += 5;
               this.time += 20;
+              this.oxygenSound.play();
               this.obstacle.splice(position, 1);
             }
         }
