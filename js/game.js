@@ -10,7 +10,7 @@ class Game {
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.time = 120;
+    this.time = 95;
     this.points = 0;
     this.pause = false;
   }
@@ -118,7 +118,7 @@ class Game {
 
   _generateOxygen() { 
     this.intervalOxygen = setInterval(() => {
-      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
+      this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
     }, 1500);
   };
 
@@ -156,11 +156,11 @@ class Game {
               this._printGameOver();
             } else {
               this.points += 5;
-              this.time += 10;
+              this.time += 20;
               this.obstacle.splice(position, 1);
             }
         }
-    })
+    });
   };
 
 
@@ -209,7 +209,7 @@ class Game {
     this.interval = clearInterval(this.interval);    
     this.intervalEnemies = clearInterval(this.intervalEnemies);
     this.intervalOxygen = clearInterval(this.intervalOxygen);
-    
+    this.intervalBackground = clearInterval(this.intervalBackground);    
   };
 
   // Pause 
@@ -218,14 +218,18 @@ class Game {
   _pause() {
     console.log('this.pause :', this.pause);
     if (!this.pause) {
-      console.log("pause active")
+      console.log("pause active");
       this.intervalEnemies = clearInterval(this.intervalEnemies);
       this.intervalOxygen = clearInterval(this.intervalOxygen);
+      this.intervalBackground = clearInterval(this.intervalBackground);    
       this.interval = window.cancelAnimationFrame(this.interval);
+      let pauseText = document.getElementById("pauseText");
+      pauseText.style = "display:block";
     } else if (this.pause) {
-      console.log("pause inactive")
-      this.start()
-      // this.interval = window.requestAnimationFrame(this._update.bind(this));
+      console.log("pause inactive");
+      pauseText.style = "display:none";
+      this.start();
+      //this.interval = window.requestAnimationFrame(this._update.bind(this));
     }
   };
  
