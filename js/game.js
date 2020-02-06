@@ -54,6 +54,7 @@ class Game {
     canvas.style = "display:none";
     time.style = "display:none";
     points.style = "display:none";
+    container.style = "display:none";
   }
 
 
@@ -80,7 +81,15 @@ class Game {
   
   // Player Elements
 
+  _updateFrame(){
+    this.widthFrame = spriteWidth/cols;
+    ctx.clearRect(this.player.x, this.player.y, this.player.widthFrame, this.player.heightFrame);
+    this.player.currentFrame = ++ this.player.currentFrame % this.player.frameCount;
+    this.player.srcX = this.player.currentFrame * this.player.widthFrame;
+  }
+
   _drawPlayer() {
+    
     this.ctx.drawImage( this.player.image, this.player.x, this.player.y, this.player.width, this.player.height);
   };
 
