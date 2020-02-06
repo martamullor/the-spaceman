@@ -10,7 +10,7 @@ class Game {
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
     this.canvasHeight = canvasHeight;
-    this.time = 95;
+    this.time = 60;
     this.points = 0;
     this.pause = false;
     this.enemiesSound = new Audio();
@@ -65,6 +65,7 @@ class Game {
       this.ctx.drawImage( this.background.image, this.background.x, this.background.y, this.background.width, this.background.height);
   };
 
+
   _moveBackground() { 
     this.intervalBackground = setInterval(() => {
       if (this.background.y < -this.canvasHeight){
@@ -80,11 +81,8 @@ class Game {
   // Player Elements
 
   _drawPlayer() {
-    this.player.image = new Image();
-    this.player.image.src = "./img/astronaut.png";
     this.ctx.drawImage( this.player.image, this.player.x, this.player.y, this.player.width, this.player.height);
   };
-
 
 
 
@@ -121,7 +119,7 @@ class Game {
   _generateObstacle() { 
     this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
-      this.time -= 5; 
+      this.time -= 1; 
     }, 1000);
   };
 
@@ -167,7 +165,7 @@ class Game {
               this._printGameOver();
             } else {
               this.points += 5;
-              this.time += 20;
+              this.time += 5;
               this.oxygenSound.play();
               this.obstacle.splice(position, 1);
             }
