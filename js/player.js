@@ -7,6 +7,8 @@ class Player {
     this.y = y;
     this.color = "green";
     this.image = undefined;
+    this.movement = new Audio();
+    this.movement.src = "./sound/movement.mp3";
     //this.intervalId = undefined;
   }
 

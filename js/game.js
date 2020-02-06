@@ -19,11 +19,7 @@ class Game {
     this.oxygenSound.src = "./sound/oxygenSound.mp3";
   }
 
-  // Sound 
 
-  _enemiesSound(){
-
-  }
 
   // Time & Points
 
@@ -76,7 +72,7 @@ class Game {
       } else {
         this.background.y -= 2;
       }
-    }, 50);
+    }, 20);
   };
   
 
@@ -90,12 +86,15 @@ class Game {
   };
 
 
+
+
   _assignControlsToKeys() {
     document.addEventListener('keydown', e => {
       e.preventDefault();
       switch (e.keyCode) {
         case 37: // arrow left
           console.log("Left");
+          //this.player.movement.play();
           this.player.moveLeft(); 
           if (this.player.x < 0){
             this.player.x = 0; 
@@ -103,6 +102,7 @@ class Game {
           break;
         case 39: // arrow right
           console.log("right");
+          //this.player.movement.play();
           this.player.moveRight();
           if (this.player.x > this.canvasWidth){
             this.player.x = this.canvasWidth; 
