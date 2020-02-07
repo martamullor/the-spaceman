@@ -140,8 +140,8 @@ class Game {
   _generateObstacle() { 
     this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
-      this.time -= 1; 
-      this.heightNumber -= 3;
+      this.time -= 3; 
+      this.heightNumber -= 5;
     }, 1500);
   };
 
