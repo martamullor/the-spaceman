@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       gameOverTitle.style = "display:none";
       time.style = "display:block";
       points.style = "display:block";
+      const containerImage = document.getElementById("image-container");
+      containerImage.style = "display:block;";
 
       console.log("restart function");
     }
