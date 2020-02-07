@@ -66,6 +66,8 @@ class Game {
     points.style = "display:none";
     const containerImage = document.getElementById("image-container");
     containerImage.style = "display:none;";
+    const containerPoints = document.getElementById("container-points");
+    containerPoints.style = "display: none";
   }
 
 
@@ -231,7 +233,7 @@ class Game {
   // Limpiado
 
   _clear(){
-    this.ctx.clearRect(0,0,886,500);
+    this.ctx.clearRect(0,0,886,600);
   };
 
   // Stop All
