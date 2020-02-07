@@ -16,9 +16,11 @@ class Game {
     this.jewel = 0;
     this.pause = false;
     this.enemiesSound = new Audio();
-    this.enemiesSound.src = './sound/enemiesSound.mp4';
+    this.enemiesSound.src = './sound/enemies.mp3';
     this.oxygenSound = new Audio();
-    this.oxygenSound.src = "./sound/oxygenSound.mp3";
+    this.oxygenSound.src = "./sound/oxygen.mp3";
+    this.jewelSound = new Audio();
+    this.jewelSound.src = "./sound/jewel.mp3";
     this.heightNumber = 170;
   }
 
@@ -97,12 +99,6 @@ class Game {
   
   // Player Elements
 
-  _updateFrame(){
-    this.widthFrame = spriteWidth/cols;
-    ctx.clearRect(this.player.x, this.player.y, this.player.widthFrame, this.player.heightFrame);
-    this.player.currentFrame = ++ this.player.currentFrame % this.player.frameCount;
-    this.player.srcX = this.player.currentFrame * this.player.widthFrame;
-  }
 
   _drawPlayer() {
     
@@ -205,6 +201,7 @@ class Game {
             } else {
               this.points += 20;
               this.jewel += 1;
+              this.jewelSound.play();
               this.obstacle.splice(position, 1);
             }
         }
