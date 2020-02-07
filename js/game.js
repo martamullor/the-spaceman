@@ -13,12 +13,13 @@ class Game {
     this.canvasHeight = canvasHeight;
     this.time = 60;
     this.points = 0;
+    this.jewel = 0;
     this.pause = false;
     this.enemiesSound = new Audio();
     this.enemiesSound.src = './sound/enemiesSound.mp4';
     this.oxygenSound = new Audio();
     this.oxygenSound.src = "./sound/oxygenSound.mp3";
-    this.heightNumber = 100;
+    this.heightNumber = 170;
   }
 
 
@@ -27,21 +28,22 @@ class Game {
 
   _drawTime(){
     let time = document.getElementById("segundos");
-    //console.log(`The time is ${this.time}`);
     time.innerHTML = this.time;
   }
 
   _drawPoints(){
     let points = document.getElementById("number");
-    //console.log(`The points is ${this.points}`);
     points.innerHTML = this.points;
+  }
+
+  _drawJewelNumber(){
+    let jewelNumber = document.getElementById("jewelNumber");
+    jewelNumber.innerHTML = this.jewel;
   }
 
   _drawOxygen(){
     let heightOxygenImage = document.getElementById("container-oxygen-full");
     heightOxygenImage.style.height = `${this.heightNumber}px`;
-    //console.log(`heightNumber ${this.heightNumber}`);
-    //console.log(`The oxygen image is ${this.heightOxygenImage}`);
   }
 
 
@@ -143,21 +145,22 @@ class Game {
     this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
       this.time -= 1; 
+      this.heightNumber -= 2.5;
     }, 1500);
   };
 
 
   _generateOxygen() { 
     this.intervalOxygen = setInterval(() => {
-      this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
-    }, 2000);
+      this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
+    }, 3000);
   };
 
 
   _generateJewel() { 
     this.intervalJewel = setInterval(() => {
       this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "jewel"));
-    }, 4880);
+    }, 5000);
   };
 
 
@@ -196,11 +199,12 @@ class Game {
             } else if (element.type === "oxygen") {
               this.points += 5;
               this.time += 5;
-              this.heightNumber += 30;
+              this.heightNumber += 15;
               this.oxygenSound.play();
               this.obstacle.splice(position, 1);
             } else {
               this.points += 20;
+              this.jewel += 1;
               this.obstacle.splice(position, 1);
             }
         }
@@ -296,6 +300,7 @@ class Game {
     this._moveObstacle();
     this._drawTime();
     this._drawPoints();
+    this._drawJewelNumber();
     this._drawOxygen();
     this._gameOver();
 

@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin:-30px 20px 10px 10px;
+    margin: 10px 20px 10px 10px;
 }
 
 .game-container {
@@ -97,7 +97,7 @@ canvas {
 
 .points-text {
     display: flex;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .score-image {
@@ -105,6 +105,23 @@ canvas {
 }
 
 .time-image {
+    width: 60px;
+}
+
+
+
+.jewel-text {
+    font-size: 30px;
+    margin-top: 40px;
+    display: flex;
+}
+
+#jewelNumber {
+    margin: 20px 0px 0px 30px;
+    font-size: 60px;
+}
+
+.jewel-image {
     width: 60px;
 }
 
@@ -120,8 +137,8 @@ canvas {
 
 
 #gameOverTitle {
-    font-size: 145px;
-    margin-bottom: 50px;
+    font-size: 165px;
+    margin-bottom: 60px;
 }
 
 
@@ -148,12 +165,12 @@ canvas {
 #oxygen-empty {
     position: absolute;
     height: 150px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
 #oxygen-full {
     height: 150px;
-    margin-top: 60px;
+    margin-top: 30px;
 
 }
 
