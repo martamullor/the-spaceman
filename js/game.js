@@ -6,6 +6,7 @@ class Game {
     this.interval = undefined;
     this.intervalEnemies = undefined;
     this.intervalOxygen = undefined;
+    this.intervalJewel = undefined;
     this.obstacle = [];
     this.intervalBackground = undefined;
     this.canvasWidth = canvasWidth;
@@ -142,14 +143,21 @@ class Game {
     this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
       this.time -= 1; 
-    }, 1000);
+    }, 1500);
   };
 
 
   _generateOxygen() { 
     this.intervalOxygen = setInterval(() => {
       this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "oxygen"));
-    }, 1500);
+    }, 2000);
+  };
+
+
+  _generateJewel() { 
+    this.intervalJewel = setInterval(() => {
+      this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "jewel"));
+    }, 4880);
   };
 
 
@@ -185,12 +193,14 @@ class Game {
               this.enemiesSound.play();
               this._stop();
               this._printGameOver();
-            } else {
+            } else if (element.type === "oxygen") {
               this.points += 5;
               this.time += 5;
               this.heightNumber += 30;
-              //this.heightOxygenImage += 10;
               this.oxygenSound.play();
+              this.obstacle.splice(position, 1);
+            } else {
+              this.points += 20;
               this.obstacle.splice(position, 1);
             }
         }
@@ -204,10 +214,14 @@ class Game {
         this.obstacle.image = new Image();
         this.obstacle.image.src = "./img/enemy.png";
         this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
-      } else {
+      } else if ( element.type === "oxygen"){
         this.obstacle.image = new Image();
         this.obstacle.image.src = "./img/oxygen.png";
         this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);
+      } else {
+        this.obstacle.image = new Image();
+        this.obstacle.image.src = "./img/gem.png";
+        this.ctx.drawImage(this.obstacle.image, element.x, element.y, element.width, element.height);  
       }
     });
   };
@@ -225,6 +239,7 @@ class Game {
     this._assignControlsToKeys();
     this._generateObstacle();
     this._generateOxygen();
+    this._generateJewel();
     this._moveBackground();
     this.interval = window.requestAnimationFrame(this._update.bind(this));
   };
@@ -243,6 +258,7 @@ class Game {
     this.interval = clearInterval(this.interval);    
     this.intervalEnemies = clearInterval(this.intervalEnemies);
     this.intervalOxygen = clearInterval(this.intervalOxygen);
+    this.intervalJewel = clearInterval(this.intervalJewel);
     this.intervalBackground = clearInterval(this.intervalBackground);    
   };
 
@@ -255,6 +271,7 @@ class Game {
       console.log("pause active");
       this.intervalEnemies = clearInterval(this.intervalEnemies);
       this.intervalOxygen = clearInterval(this.intervalOxygen);
+      this.intervalJewel = clearInterval(this.intervalJewel);
       this.intervalBackground = clearInterval(this.intervalBackground);    
       this.interval = window.cancelAnimationFrame(this.interval);
       let pauseText = document.getElementById("pauseText");
