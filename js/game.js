@@ -17,7 +17,7 @@ class Game {
     this.enemiesSound.src = './sound/enemiesSound.mp4';
     this.oxygenSound = new Audio();
     this.oxygenSound.src = "./sound/oxygenSound.mp3";
-    this.heightOxygenImage = "100px";
+    this.heightNumber = 100;
   }
 
 
@@ -38,9 +38,12 @@ class Game {
 
   _drawOxygen(){
     let heightOxygenImage = document.getElementById("container-oxygen-full");
-    heightOxygenImage.style.height = this.heightOxygenImage;
-    console.log(`The oxygen image is ${this.heightOxygenImage}`);
+    heightOxygenImage.style.height = `${this.heightNumber}px`;
+    //console.log(`heightNumber ${this.heightNumber}`);
+    //console.log(`The oxygen image is ${this.heightOxygenImage}`);
   }
+
+
 
 
   // GameOver 
@@ -183,6 +186,8 @@ class Game {
             } else {
               this.points += 5;
               this.time += 5;
+              this.heightNumber += 30;
+              //this.heightOxygenImage += 10;
               this.oxygenSound.play();
               this.obstacle.splice(position, 1);
             }
