@@ -1,6 +1,6 @@
 
 class Player {
-  constructor(width,height, x, y,spriteWidth,spriteHeight, cols, rows){
+  constructor(width,height, x, y){
     this.width = width;
     this.height = height;
     this.x = x;
@@ -11,7 +11,6 @@ class Player {
     this.movement.src = "./sound/movement.mp3";
     this.image = new Image();
     this.image.src = "./img/astronaut.png";
-    //this.intervalId = undefined;
   }
 
   moveRight(){

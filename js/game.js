@@ -141,7 +141,7 @@ class Game {
     this.intervalEnemies = setInterval(() => {
       this.obstacle.push(new Obstacle(60, 60, this._getRandomNumber(this.canvasWidth), 0, "enemy"));
       this.time -= 1; 
-      this.heightNumber -= 2.5;
+      this.heightNumber -= 3;
     }, 1500);
   };
 
@@ -156,7 +156,7 @@ class Game {
   _generateJewel() { 
     this.intervalJewel = setInterval(() => {
       this.obstacle.push(new Obstacle(50, 50, this._getRandomNumber(this.canvasWidth), 0, "jewel"));
-    }, 5000);
+    }, 5100);
   };
 
 

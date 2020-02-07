@@ -1,13 +1,10 @@
 # The Spaceman
-The objective of the game is to avoid obstacles and not run out of oxygen.
 
-The game screen is an astronaut that moves up and dodges items that appear randomly on the screen.
+The purpose of the game is for the astronaut to move from right to left through space dodging meteorites and collecting oxygen to win time and points.
 
-The player can moves to the right and left and that can leave by a side of the board and appear in the other side.
+The player can also earn points by collecting gems that will give him extra points.
 
-The player uses the arrows from left to right to move.
-
-The game ends when a collision is detected between the player and the obstacle or when the player runs out of oxygen.
+The player will die if he collides with a meteorite or if he runs out of oxygen.
 
 Extra: In each level more obstacles appear and the astronaut goes a little faster.
 
@@ -25,11 +22,11 @@ Html5 __Canvas__ and Vanilla __Javascript__
   * Play again button
   * Go to start screen button
 ### Game
-* Create line
-* Create online player
+* Create obstacles
+* Create player
 * Move player
 * Click on any button to move the player from right to left of the board.
-* Create obstacles and oxygen as the player progresses.
+* Create obstacles, oxygen and gems random in the canvas.
 * Check collision
 * In case of collision -> Game Over -> Show Game Over screen
 * In case of running out of oxygen -> Game Over -> Show Game Over screen
@@ -42,64 +39,107 @@ Html5 __Canvas__ and Vanilla __Javascript__
 * Show latest score on Start Screen
 * Add high score button to Start Screen
 ### Music
-* Add background music to game
-* Add music on and off button to Start screen.
-* Add sound every time the player collide
-* Add sound every time the player picks up oxygen
-### Player colors FALTA
-* Create Color Screen
-* Let user choose color of player with color buttons
-* Add Choose color button to Start Screen
-* Change color of player when playing
-### Levels 
-* Check the time and increase level.
+* Add sound in collisions 
 * * *
 ## Data structure 
 __main.js__
 ````
-createStartScreen(id);
-createGameScreen(id);
-createGameOverScreen(id);
-destroyStartScreen();
-destroyGameScreen();
-destroyGameOverScreen();
-var game = new Game({
-    this.rows,
-    this.columns,
-    ctx: ctx,
-    backgroundcolor = ['xxx','xxx','xxx'],
-    this.obstacles,
-    this.player
-  });
-game.init();
+  game = new Game({ctx}, 
+    new Player(80,80,200,500),
+    new Background(886,3130,0,0), 
+    canvas.width-100, 
+    canvas.height);
+
+  
+    function start(){
+      canvas.style = "display:block";
+      game.start();
 ````
 __Game.js__
 ````
-function Game(options){};
-Game.drawBoard();
-Game.drawPlayer();
-Game.generateElements();
-Game.gameOver();
-Game.init(); 
-Game.pause();
-Game.update();
+class Game {
+  constructor(options, player,background,canvasWidth,canvasHeight){
+    this.ctx = options.ctx;
+    this.player = player;
+    this.background = background;
+    this.interval = undefined;
+    this.intervalEnemies = undefined;
+    this.intervalOxygen = undefined;
+    this.intervalJewel = undefined;
+    this.obstacle = [];
+    this.intervalBackground = undefined;
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
+    this.time = 60;
+    this.points = 0;
+    this.jewel = 0;
+    this.pause = false;
+    this.enemiesSound = new Audio();
+    this.enemiesSound.src = './sound/enemies.mp3';
+    this.oxygenSound = new Audio();
+    this.oxygenSound.src = "./sound/oxygen.mp3";
+    this.jewelSound = new Audio();
+    this.jewelSound.src = "./sound/jewel.mp3";
+    this.heightNumber = 170;
+  }
 
-// Propiedad en el snake que sea interval para luego hacer el pause.
-// Primero la declaramos en undefined.
+   _update();
+   _pause();
+   _stop();
+   _clear();
+   _getRandomNumber(max);
+   _drawObstacle();
+   _collidesWithObstacle();
+   _deleteObstacles();
+   _moveObstacle();
+   _generateJewel();
+   _generateOxygen();
+   _generateObstacle();
+   _assignControlsToKeys();
+   _drawPlayer();
+  _moveBackground();
+  _drawBackground();
+  _printGameOver();
+  _gameOver();
+  _drawOxygen();
+  _drawJewelNumber();
+  _drawPoints();
+  _drawTime();
+
 ````
 __Player.js__
 ````
-function Player(){
+class Player {
+  constructor(width,height, x, y){
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.color = "green";
+    this.image = undefined;
+    this.movement = new Audio();
+    this.movement.src = "./sound/movement.mp3";
+    this.image = new Image();
+    this.image.src = "./img/astronaut.png";
+  }
 
-};
+  moveRight();
+  moveLeft();
 
 Player.move();
 ````
 __Obstacles.js__
 ````
-function Obstacles(){
-  
-};
+class Obstacle {
+    constructor(width,height, x, y,type){
+      this.width = width;
+      this.height = height;
+      this.x = x;
+      this.y = y;
+      this.type = type;
+      this.interval = undefined;
+    }
+    
 
 ````
 ## Links

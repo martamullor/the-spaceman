@@ -50,11 +50,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
       const containerPoints = document.getElementById("container-points");
       containerPoints.style = "display:block;";
 
-      console.log("restart function");
+
     }
     
     
-    console.log("Game start");
 
     const startButton = document.getElementById("start");
     startButton.addEventListener("click", start);
@@ -64,5 +63,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const tryAgain = document.getElementById("tryAgain");
     tryAgain.addEventListener("click", restart);
 
-    console.log("Try again activated")
 });
