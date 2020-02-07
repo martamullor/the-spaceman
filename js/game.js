@@ -17,6 +17,7 @@ class Game {
     this.enemiesSound.src = './sound/enemiesSound.mp4';
     this.oxygenSound = new Audio();
     this.oxygenSound.src = "./sound/oxygenSound.mp3";
+    this.heightOxygenImage = "100px";
   }
 
 
@@ -33,6 +34,12 @@ class Game {
     let points = document.getElementById("number");
     //console.log(`The points is ${this.points}`);
     points.innerHTML = this.points;
+  }
+
+  _drawOxygen(){
+    let heightOxygenImage = document.getElementById("container-oxygen-full");
+    heightOxygenImage.style.height = this.heightOxygenImage;
+    console.log(`The oxygen image is ${this.heightOxygenImage}`);
   }
 
 
@@ -54,7 +61,8 @@ class Game {
     canvas.style = "display:none";
     time.style = "display:none";
     points.style = "display:none";
-    container.style = "display:none";
+    const containerImage = document.getElementById("image-container");
+    containerImage.style = "display:none;";
   }
 
 
@@ -264,6 +272,7 @@ class Game {
     this._moveObstacle();
     this._drawTime();
     this._drawPoints();
+    this._drawOxygen();
     this._gameOver();
 
     if (!!this.interval) {

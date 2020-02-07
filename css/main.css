@@ -99,6 +99,23 @@ canvas {
     color: black;
 }
 
+#container-oxygen-full {
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+#oxygen-empty {
+    position: absolute;
+}
+
+.image-container {
+    position: relative;
+}
+
+
+
 
 
 
